@@ -14,7 +14,7 @@ contract escrow_wallet
     }
     item product;
     
-    uint balance;//escrow balance amount
+    uint balance;//total escrow balance amount
     uint start;//starting time
     uint end;//ending time
     
@@ -26,7 +26,7 @@ contract escrow_wallet
     bool public buyerOK;
     bool public sellerOK;
     
-    constructor (address payable _seller) public//buyer is the deployer 
+    constructor (address payable _seller) public//here the buyer is the deployer 
     {
         buyer=msg.sender;
         seller=_seller;
@@ -96,9 +96,9 @@ contract escrow_wallet
         require(msg.sender==buyer);
         if(buyerOK==false&&sellerOK==true)
             seller.transfer(address(this).balance);
-        else if(buyerOK&&!sellerOK&&end>start+172800)//time exceeds 30 days after the buyer has deposited in the escrow contract
+        else if(buyerOK&&!sellerOK&&end>start+172800)//if this time exceeds 30 days after the buyer has deposited in the escrow contract
         {
-            require(address(this).balance!=0,"Already money transferred");
+            require(address(this).balance!=0,"Already money has been transferred");
             buyer.transfer(address(this).balance);
         }
         current=state.COMPLETE;
