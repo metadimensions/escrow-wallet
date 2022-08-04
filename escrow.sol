@@ -83,13 +83,13 @@ contract escrow_wallet
             release_fund();
     }
     
-    function release_fund()private
+    function release_fund() private
     {
             if(buyerOK&&sellerOK)
                 seller.transfer((address(this).balance));
             current=state.COMPLETE;
     }
-    function withdraw_amount() public 
+    function withdraw_amount() public payable
     {
         end=block.timestamp;
         require(current==state.AWAITING_DELIVERY);
