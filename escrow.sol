@@ -83,6 +83,8 @@ contract escrow_wallet
             release_fund();
     }
     
+    //release fund execution begins
+    
     function release_fund() private
     {
             if(buyerOK&&sellerOK)
